@@ -1,0 +1,61 @@
+{
+  "_from": "node-red-contrib-redash@0.0.2",
+  "_id": "node-red-contrib-redash@0.0.2",
+  "_inBundle": false,
+  "_integrity": "sha512-j13oKWNs/L7zktt1F24wpnHH0W60Gg1lBQ7CuPsOLqlR3VUZ8cPwa+7hb05rT1yxOaZPsrIHqMi6mGUnFuY6AA==",
+  "_location": "/node-red-contrib-redash",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "node-red-contrib-redash@0.0.2",
+    "name": "node-red-contrib-redash",
+    "escapedName": "node-red-contrib-redash",
+    "rawSpec": "0.0.2",
+    "saveSpec": null,
+    "fetchSpec": "0.0.2"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/node-red-contrib-redash/-/node-red-contrib-redash-0.0.2.tgz",
+  "_shasum": "ed92af3e3bdeefc1c2baf0370ae93b00399b920b",
+  "_spec": "node-red-contrib-redash@0.0.2",
+  "_where": "C:\\Users\\user\\.node-red",
+  "author": {
+    "name": "hkjang",
+    "email": "gagagiga@naver.com"
+  },
+  "bugs": {
+    "url": "https://github.com/hkjang/node-red-contrib-redash/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "request": "^2.51.0"
+  },
+  "deprecated": false,
+  "description": "A node-red module to get to your redash server",
+  "homepage": "https://github.com/hkjang/node-red-contrib-redash#readme",
+  "keywords": [
+    "node-red",
+    "redash",
+    "get"
+  ],
+  "license": "MIT",
+  "main": "redash.js",
+  "name": "node-red-contrib-redash",
+  "node-red": {
+    "nodes": {
+      "redash": "redash.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hkjang/node-red-contrib-redash.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.2"
+}

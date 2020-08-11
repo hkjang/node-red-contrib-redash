@@ -1,0 +1,44 @@
+
+<script type="text/x-red" data-template-name="redash">
+    <div class="form-row">
+        <label for="node-input-redashAPIURL"><i class="fa fa-link"></i> API URL</label>
+        <input type="text" id="node-input-redashAPIURL" placeholder="redash API URL" style=" vertical-align: top;">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-apiKey"><i class="fa fa-key"></i> API Key </label>
+        <input type="text" id="node-input-apiKey" placeholder="API_KEY">
+    </div>
+
+</script>
+
+<script type="text/x-red" data-help-name="redash">
+   <p>Request <b>msg.payload</b> params to redash API.</p>
+   <p>Simple way to get to redash API.</p>
+   <p><a href="https://redash.io/" target="_new">ref this</a></p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('redash',{
+        category: 'function',
+        defaults: {
+            redashAPIURL: {value:"", required:true},
+            apiKey: {value:"", required:false}
+        },
+        // credentials: {
+        //     apiKey: {type: "password"}
+        // },
+        color:"#f26d5b",
+        icon: "redash.png",
+        align: "left",
+        inputs:1,
+        outputs:1,
+        label: function() {
+            return this.name||"redash";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        }
+    });
+
+</script>
