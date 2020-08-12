@@ -18,7 +18,8 @@ module.exports = function(RED) {
             var redashAPIURL = node.redashAPIURL || msg.redashAPIURL;
             var apiKey = node.apiKey || msg.apiKey;
             var method = node.method || msg.method;
-            var id = msg.payload.id;
+            var results = node.results || msg.results;
+            var id = msg.payload.id || msg.queryid;
             var data = msg.payload;
 
             if (this.credentials && this.credentials.apiKey) {
@@ -31,9 +32,19 @@ module.exports = function(RED) {
                 options.method = method;
                 if(id){
                     if(method === 'get'){
-                        options.uri = redashAPIURL + '/' + id + '/results.json?api_key=' + apiKey;
+                        if(redashAPIURL.indexOf('jobs') > -1){ // job get api
+                            options.uri = redashAPIURL + '/' + id + '?api_key=' + apiKey;
+                        }else if(redashAPIURL.indexOf('dashboards') > -1){ // dashboard get api
+                            options.uri = redashAPIURL + '/' + id + '?api_key=' + apiKey;
+                        }else{
+                            options.uri = redashAPIURL + '/' + id + '/results.json?api_key=' + apiKey;
+                        }
                     }else if(method === 'post' || method === 'put' || method === 'delete') {
-                        options.uri = redashAPIURL + '/' + id + '?api_key=' + apiKey;
+                        if(results){
+                            options.uri = redashAPIURL + '/' + id + '/results';
+                        }else{
+                            options.uri = redashAPIURL + '/' + id;
+                        }
                     }
                 }else{
                     options.uri = redashAPIURL + '?api_key=' + apiKey;
@@ -43,14 +54,17 @@ module.exports = function(RED) {
                 if(method === 'get'){
                     options.query = JSON.stringify(data);
                     options.headers = {
-                        'Authorization': 'Bearer '+apiKey
+                        'Authorization': 'Key ' + apiKey
                     };
+                    node.log(options.query);
                 }else if(method === 'post' || method === 'put' || method === 'delete'){
-                    options.body = JSON.stringify(data);
+                    options.method = method;
+                    options.body = {};
+                    options.body.parameters = data;
+                    options.body = JSON.stringify(options.body);
                     options.headers = {
-                        'Authorization': 'Bearer '+apiKey,
-                        'Content-Type': 'application/json',
-                        'Content-Length': data.length
+                        'Authorization': 'Key ' + apiKey,
+                        'Content-Type': 'application/json'
                     };
                     node.log(options.body);
                 }
@@ -62,6 +76,7 @@ module.exports = function(RED) {
                     }else{
                         msg.payload = body;
                         msg.res = res;
+                        node.log(body);
                         self.send(msg);
                     }
                 });
